@@ -22,7 +22,7 @@ default: &default
 development:
   <<: *default
   database: book_lending_system_development
-  username: postgres # Default PostgreSQL user
+  username: <%= ENV['DATABASE_USER'] %> 
   password: <%= ENV['DATABASE_PASSWORD'] %> 
   host: localhost
   port: 5432
@@ -60,7 +60,7 @@ development:
 test:
   <<: *default
   database: book_lending_system_test
-  username: postgres # Default PostgreSQL user
+  username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %> 
   host: localhost
   port: 5432
@@ -90,7 +90,7 @@ production:
   primary: &primary_production
     <<: *default
     database: book_lending_system_production
-    username: postgres # Default PostgreSQL user
+    username: <%= ENV['DATABASE_USER'] %>
     password: <%= ENV['DATABASE_PASSWORD'] %> 
     host: localhost
     port: 5432
