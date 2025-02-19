@@ -1,0 +1,50 @@
+<h1><%= @book.title %></h1>
+<p><strong>Author:</strong> <%= @book.author %></p>
+<p><strong>Description:</strong> <%= @book.description %></p>
+<p><strong>Status:</strong> <%= @book.status %></p>
+
+<% if @book.available? %>
+  <%= form_with url: book_borrowings_path(@book), local: true do |form| %>
+    <div class="mb-3">
+      <%= form.label :borrower_name, "Borrower Name", class: "form-label" %>
+      <%= form.text_field :borrower_name, class: "form-control", required: true %>
+    </div>
+    <%= form.submit "Borrow Book", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <p><strong>This book is currently borrowed.</strong></p>
+<% end %>
+
+<h2>Borrowing History</h2>
+<ul class="list-group">
+  <% @borrow_history.each do |history| %>
+    <li class="list-group-item">
+      <strong><%= history.borrower_name %></strong> - 
+      Borrowed: <%= history.borrowed_at.strftime("%Y-%m-%d") %> 
+      <% if history.returned_at %>
+        | Returned: <%= history.returned_at.strftime("%Y-%m-%d") %>
+      <% else %>
+        | <%= button_to "Return", book_borrowing_path(@book, history), method: :patch, class: "btn btn-success" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<!-- Edit and Delete Buttons -->
+<div>
+  <% if @book.borrowing_histories.exists?(returned_at: nil) %>
+    <p><strong>This book is currently borrowed and cannot be edited.</strong></p>
+    <button class="btn btn-warning" disabled>Cannot Edit</button>
+  <% else %>
+    <%= link_to "Edit Book", edit_book_path(@book), class: "btn btn-warning" %>
+  <% end %>
+
+  <% if @book.borrowing_histories.exists?(returned_at: nil) %>
+    <p><strong>This book is currently borrowed and cannot be deleted.</strong></p>
+  <% else %>
+    <%= button_to "Delete Book", book_path(@book), method: :delete, 
+        data: { confirm: "Are you sure you want to delete this book?" }, class: "btn btn-danger" %>
+  <% end %>
+</div>
+
+<%= link_to "Back to Books", books_path, class: "btn btn-secondary" %>

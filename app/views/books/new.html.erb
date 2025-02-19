@@ -1,0 +1,26 @@
+<h1>Add a New Book</h1>
+
+<%= form_with model: @book, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :author, class: "form-label" %>
+    <%= form.text_field :author, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", required: true %>
+  </div>
+
+  <%= form.hidden_field :status, value: "available" %>
+
+  <div class="mb-3">
+    <%= form.submit "Create Book", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", books_path, class: "btn btn-primary" %>

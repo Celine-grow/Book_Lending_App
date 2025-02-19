@@ -1,0 +1,19 @@
+<h1>Update Borrowing</h1>
+
+<% if @borrowing.errors.any? %>
+  <div class="alert alert-danger">
+    <h2><%= pluralize(@borrowing.errors.count, "error") %> prevented this borrowing from being updated:</h2>
+    <ul>
+      <% @borrowing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <p>The borrowing record has been updated successfully.</p>
+  <p><strong>Book ID:</strong> <%= @borrowing.book_id %></p>
+  <p><strong>Returned At:</strong> <%= @borrowing.returned_at %></p>
+  <p><strong>Status:</strong> <%= @borrowing.status %></p>
+
+  <%= link_to "Back to Borrowings", borrowings_path, class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>Borrowing Confirmation</h1>
+
+<% if @borrowing.persisted? %>
+  <p>The book has been successfully borrowed!</p>
+  <p><strong>Book ID:</strong> <%= @borrowing.book_id %></p>
+  <p><strong>Borrowed At:</strong> <%= @borrowing.borrowed_at %></p>
+  <p><strong>Status:</strong> <%= @borrowing.status %></p>
+
+  <%= link_to "Back to Borrowings", borrowings_path, class: "btn btn-primary" %>
+<% else %>
+  <p>Failed to borrow the book. Please try again.</p>
+  <%= link_to "Try Again", new_borrowing_path, class: "btn btn-danger" %>
+<% end %>

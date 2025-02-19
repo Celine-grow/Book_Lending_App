@@ -1,0 +1,12 @@
+<h1>Library</h1>
+<h2>Add new books</h2>
+        <%= link_to "Add New Book", new_book_path, class: "btn btn-primary mb-3" %>
+<h2>Books</h2>
+<ul class="list-group">
+  <% @books.each do |book| %>
+    <li class="list-group-item"> 
+      <%= link_to book.title, book_path(book), class:"text-decoration-none" %> - 
+      <strong>Status:</strong> <%= book.status %>
+    </li>
+  <% end %>
+</ul>

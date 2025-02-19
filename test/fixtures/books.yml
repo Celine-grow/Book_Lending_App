@@ -1,0 +1,11 @@
+one:
+  title: "Harry Potter"
+  author: "J.K. Rowling"
+  status: "available"
+  description: "A book about a young wizard."
+
+two:
+  title: "The Hobbit"
+  author: "J.R.R. Tolkien"
+  status: "borrowed"
+  description: "A fantasy adventure novel."
